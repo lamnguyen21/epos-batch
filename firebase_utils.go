@@ -77,13 +77,13 @@ func processItems(client *db.Client) error {
 				if err != nil {
 					log.Printf("Unable to read price of item with code %v, error details %v\n", v["Code"], err.Error())
 				} else {
-					if curPrice != item.UnitPrice {
+					if curPrice != item.UnitPrice && item.UnitPrice == 0 {
 						log.Printf("Item Key: %v, Current Price: %v, New Price: %v\n", q.Key(), curPrice, item.UnitPrice)
 						if err := updatePrice(q.Key(), item.UnitPrice, itemRef); err != nil {
 							log.Fatalf("Unable to update price for item with code %v", item.ObjectNumber)
 						}
 					} else {
-						log.Printf("Price does not change for item with code %v\n", item.ObjectNumber)
+						log.Printf("New price %v was not updated for item with Code %v\n", item.UnitPrice, item.ObjectNumber)
 					}
 				}
 			}
