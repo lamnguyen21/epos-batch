@@ -51,3 +51,13 @@ func TestProcessItems(t *testing.T) {
 		processItems(client)
 	}
 }
+
+func TestUpdateItem(t *testing.T) {
+	fbStore := FireBaseStore{}
+	err := fbStore.init("serviceAccountKey.json")
+	if err != nil {
+		t.Error(err)
+	} else {
+		fbStore.updateItemPrice(Item{"64300KZLE00ZE", "Bộ mặt nạ trước *NHB35*", "194,604"})
+	}
+}
