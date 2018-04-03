@@ -22,7 +22,7 @@ func (itemDAO *ItemDAO) processItems(callback func([]Item)) {
 	buffer := make([]Item, 10)
 	for _, row := range itemDAO.sheet.Rows {
 		if len(buffer) < 10 {
-			buffer = append(buffer, Item{row.Cells[1].String(), row.Cells[6].String(), row.Cells[11].String()})
+			buffer = append(buffer, Item{row.Cells[1].String(), row.Cells[6].String(), row.Cells[14].String()})
 		} else {
 			callback(buffer)
 			buffer = buffer[len(buffer):]
