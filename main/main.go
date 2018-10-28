@@ -14,7 +14,7 @@ func main() {
 
 	flag.StringVar(&path, "file", "", "Specify a path to your serviceAccount.json")
 	flag.StringVar(&data, "data", "", "Specify a path to your data excel file")
-	flag.UintVar(&mode, "run mode", 0, "Specify a run mode. 0 for updating item price, 1 for updating vendor price")
+	flag.UintVar(&mode, "mode", 0, "Specify a run mode. 0 for updating item price, 1 for updating vendor price")
 	flag.Parse()
 
 	if strings.Compare(path, "") == 0 || strings.Compare(data, "") == 0 {
