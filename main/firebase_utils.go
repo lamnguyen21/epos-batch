@@ -33,6 +33,27 @@ func (store *FireBaseStore) init(serviceAcctFile string) error {
 	}
 }
 
+func (store *FireBaseStore) updateVendorPrice(item Item) error {
+	vendorPrices := store.Database.NewRef("vendorprices")
+	queries, err := items.OrderByChild("Code").EqualTo(item.Code).GetOrdered(context.Background())
+
+	if err != nil {
+		return err
+	}
+
+	for _, query := range queries {
+		vendorPrices.Child(query.Key()).Update(
+			context.Background(),
+			map[string]interface{}{
+				"retailPriceVAT": item.RetailPriceVAT,
+				"extraPrice":     item.ExtraPrice,
+			},
+		)
+	}
+
+	return nil
+}
+
 func (store *FireBaseStore) updateItemPrice(item Item) error {
 	items := store.Database.NewRef("items")
 	queries, err := items.OrderByChild("Code").EqualTo(item.Code).GetOrdered(context.Background())
