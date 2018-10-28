@@ -35,7 +35,7 @@ func (store *FireBaseStore) init(serviceAcctFile string) error {
 
 func (store *FireBaseStore) updateVendorPrice(item Item) error {
 	vendorPrices := store.Database.NewRef("vendorprices")
-	queries, err := items.OrderByChild("Code").EqualTo(item.Code).GetOrdered(context.Background())
+	queries, err := vendorPrices.OrderByChild("Code").EqualTo(item.Code).GetOrdered(context.Background())
 
 	if err != nil {
 		return err
