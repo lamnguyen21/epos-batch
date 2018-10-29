@@ -39,13 +39,17 @@ func main() {
 		} else {
 			if mode == 0 {
 				itemDAO.processOriginalItems(func(items []Item) {
-					logger.Printf("Update item with code %v\n", item.Code)
-					fbStore.updateItemPrice(item)
+					for _, item := range items {
+						logger.Printf("Update item with code %v\n", item.Code)
+						fbStore.updateItemPrice(item)
+					}
 				})
 			} else {
 				itemDAO.processItems(func(items []Item) {
-					logger.Printf("Update vendor price with code %v\n", item.Code)
-					fbStore.updateVendorPrice(item)
+					for _, item := range items {
+						logger.Printf("Update vendor price with code %v\n", item.Code)
+						fbStore.updateVendorPrice(item)
+					}
 				})
 			}
 		}
