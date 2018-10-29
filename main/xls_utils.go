@@ -34,3 +34,16 @@ func (itemDAO *ItemDAO) processItems(callback func([]Item)) {
 		}
 	}
 }
+
+func (itemDAO *ItemDAO) processOriginalItems(callback func([]Item)) {
+	buffer := make([]Item, 10)
+	for _, row := range itemDAO.sheet.Rows {
+		if len(buffer) < 10 {
+			buffer = append(buffer, Item{
+				Code:           row.Cells[1].String(),
+				VmName:         row.Cells[6].String(),
+				RetailPriceVAT: row.Cells[14].String(),
+			})
+		}
+	}
+}

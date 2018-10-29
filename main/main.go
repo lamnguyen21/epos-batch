@@ -37,17 +37,17 @@ func main() {
 		if err != nil {
 			panic(err)
 		} else {
-			itemDAO.processItems(func(items []Item) {
-				for _, item := range items {
-					if mode == 0 {
-						logger.Printf("Update item with code %v\n", item.Code)
-						fbStore.updateItemPrice(item)
-					} else {
-						logger.Printf("Update vendor price with code %v\n", item.Code)
-						fbStore.updateVendorPrice(item)
-					}
-				}
-			})
+			if mode == 0 {
+				itemDAO.processOriginalItems(func(items []Item) {
+					logger.Printf("Update item with code %v\n", item.Code)
+					fbStore.updateItemPrice(item)
+				})
+			} else {
+				itemDAO.processItems(func(items []Item) {
+					logger.Printf("Update vendor price with code %v\n", item.Code)
+					fbStore.updateVendorPrice(item)
+				})
+			}
 		}
 	}
 }

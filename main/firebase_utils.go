@@ -66,7 +66,6 @@ func (store *FireBaseStore) updateItemPrice(item Item) error {
 			context.Background(),
 			map[string]interface{}{
 				"retailPriceVAT": item.RetailPriceVAT,
-				"extraPrice":     item.ExtraPrice,
 			})
 	}
 	return nil
