@@ -44,6 +44,9 @@ func (itemDAO *ItemDAO) processOriginalItems(callback func([]Item)) {
 				VmName:         row.Cells[6].String(),
 				RetailPriceVAT: row.Cells[14].String(),
 			})
+		} else {
+			callback(buffer)
+			buffer = buffer[len(buffer):]
 		}
 	}
 }
